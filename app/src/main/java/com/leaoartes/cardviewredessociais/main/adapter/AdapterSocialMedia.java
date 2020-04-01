@@ -10,8 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.leaoartes.cardviewredessociais.R;
+import com.leaoartes.cardviewredessociais.main.model.PostListClass;
+
+import java.util.List;
 
 public class AdapterSocialMedia extends RecyclerView.Adapter<AdapterSocialMedia.MyViewHolder> {
+
+    private List<PostListClass> postListClassList;
+    public AdapterSocialMedia(List<PostListClass> postListClassListAdapter) {
+        this.postListClassList = postListClassListAdapter;
+    }
 
     @NonNull
     @Override
@@ -26,16 +34,16 @@ public class AdapterSocialMedia extends RecyclerView.Adapter<AdapterSocialMedia.
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        holder.imageViewPost.setImageResource(R.drawable.programando);
-        holder.textViewPost.setText("Estudar / Programar");
-        holder.textViewDescription.setText("Acordei bem cedo para estudar e programar, afinal todo esforço será recompensado! #boralutar");
+        PostListClass postBindViewHolder = postListClassList.get(position);
+        holder.imageViewPost.setImageResource(postBindViewHolder.getImagePostView());
+        holder.textViewPost.setText(postBindViewHolder.getTextViewPostTitle());
+        holder.textViewDescription.setText(postBindViewHolder.getTextViewDescription());
     }
 
     @Override
     public int getItemCount() {
 
-
-        return 6;
+        return postListClassList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
@@ -48,7 +56,7 @@ public class AdapterSocialMedia extends RecyclerView.Adapter<AdapterSocialMedia.
             super(itemView);
 
             textViewDescription = itemView.findViewById(R.id.textViewDescription);
-            textViewPost = itemView.findViewById(R.id.textViewPost);
+            textViewPost = itemView.findViewById(R.id.textViewPostTitle);
             imageViewPost = itemView.findViewById(R.id.imageViewPost);
 
         }
